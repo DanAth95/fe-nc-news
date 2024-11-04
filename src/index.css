@@ -91,3 +91,17 @@ button:focus-visible {
   width: 200px;
   height: 200px;
 }
+
+#comment-list {
+  height: 300px;
+  overflow: auto;
+}
+
+.comment-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  height: 200px;
+}
