@@ -66,3 +66,24 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+#navbar {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 40px;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.article-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid black;
+}
+
+.article-card > img {
+  width: 200px;
+  height: 200px;
+}
