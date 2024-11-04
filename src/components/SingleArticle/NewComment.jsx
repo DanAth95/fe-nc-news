@@ -5,11 +5,13 @@ import axios from "axios";
 export default function NewComment({ setCommentList, commentList, article }) {
   const [newComment, setNewComment] = useState("Add a comment...");
   const [posting, setPosting] = useState(false);
+  const [error, setError] = useState(false);
 
   const { user } = useContext(UserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
+    setError(false);
     setPosting(true);
     const postingComment = {
       body: newComment,
@@ -34,6 +36,9 @@ export default function NewComment({ setCommentList, commentList, article }) {
       )
       .then(() => {
         setPosting(false);
+      })
+      .catch((err) => {
+        setError(true);
       });
   }
 
@@ -66,6 +71,7 @@ export default function NewComment({ setCommentList, commentList, article }) {
           disabled={posting ? true : false}
         />
       </form>
+      {error ? <p>Comment failed to post. Please try again</p> : null}
     </div>
   );
 }
