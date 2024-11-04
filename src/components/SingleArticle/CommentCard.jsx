@@ -1,7 +1,7 @@
 export default function CommentCard({ comment }) {
-  const date = `${new Date(comment.created_at).getDate()}/${new Date(
-    comment.created_at
-  ).getMonth()}/${new Date(comment.created_at).getFullYear()}`;
+  const date = `${new Date(comment.created_at).getDate()}/${
+    new Date(comment.created_at).getMonth() + 1
+  }/${new Date(comment.created_at).getFullYear()}`;
   return (
     <>
       <p>

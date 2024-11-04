@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CommentCard from "./CommentCard";
+import NewComment from "./NewComment";
 
 export default function CommentList({ article }) {
   const [commentList, setCommentList] = useState([]);
@@ -20,6 +21,11 @@ export default function CommentList({ article }) {
   return (
     <>
       <h3>Comments</h3>
+      <NewComment
+        setCommentList={setCommentList}
+        commentList={commentList}
+        article={article}
+      />
       <div id="comment-list">
         {commentList.map((comment) => {
           return (

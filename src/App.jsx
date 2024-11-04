@@ -1,10 +1,10 @@
-import Header from "../components/Header";
+import Header from "./components/Header";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import Navbar from "./components/Navbar";
 import { useState } from "react";
-import ArticleList from "../components/ArticleList";
-import Article from "../components/SingleArticle/Article";
-import CommentList from "../components/SingleArticle/CommentList";
+import ArticleList from "./components/ArticleList";
+import Article from "./components/SingleArticle/Article";
+import CommentList from "./components/SingleArticle/CommentList";
 
 function App() {
   const [topic, setTopic] = useState("");

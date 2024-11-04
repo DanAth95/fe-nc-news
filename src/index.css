@@ -25,6 +25,7 @@ a:hover {
 }
 
 body {
+  margin-left: 10px;
   margin: 0;
   display: flex;
   place-items: center;
@@ -93,6 +94,7 @@ button:focus-visible {
 }
 
 #comment-list {
+  margin-top: 50px;
   height: 300px;
   overflow: auto;
 }
