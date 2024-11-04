@@ -27,7 +27,7 @@ function App() {
           path="/article/:article_id"
           element={
             <>
-              <Article article={article} />
+              <Article article={article} setArticle={setArticle} />
               <CommentList article={article} />
             </>
           }
