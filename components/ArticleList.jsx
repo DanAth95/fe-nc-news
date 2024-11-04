@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import ArticleCard from "./ArticleCard";
 
-export default function ArticleList({ topic }) {
+export default function ArticleList({ topic, setArticle }) {
   const [articleList, setArticleList] = useState([]);
 
   useEffect(() => {
@@ -13,14 +13,12 @@ export default function ArticleList({ topic }) {
       });
   }, []);
 
-  console.log(articleList);
-
   return (
     <div>
       {articleList.map((article) => {
         return (
           <div key={article.article_id} className="article-card">
-            <ArticleCard article={article} />
+            <ArticleCard article={article} setArticle={setArticle} />
           </div>
         );
       })}

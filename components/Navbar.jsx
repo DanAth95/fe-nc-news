@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
-export default function Navbar({ setTopic }) {
+export default function Navbar({ setTopic, setArticle }) {
   const [topicList, setTopicList] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,15 @@ export default function Navbar({ setTopic }) {
   return (
     <ul id="navbar">
       <li>
-        <Link to="/">Home</Link>
+        <Link
+          to="/"
+          onClick={() => {
+            setTopic("");
+            setArticle({});
+          }}
+        >
+          Home
+        </Link>
       </li>
       {useLocation().pathname === "/"
         ? topicList.map((topic) => {
