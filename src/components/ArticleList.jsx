@@ -2,19 +2,21 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import ArticleCard from "./ArticleCard";
 
-export default function ArticleList({ topic }) {
+export default function ArticleList({ topic, sortBy, order }) {
   const [articleList, setArticleList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`https://nc-news-z5fx.onrender.com/api/articles?topic=${topic}`)
+      .get(
+        `https://nc-news-z5fx.onrender.com/api/articles?topic=${topic}&sort_by=${sortBy}&order=${order}`
+      )
       .then((response) => {
         setArticleList(response.data.articles);
         setIsLoading(false);
       });
-  }, [topic]);
+  }, [topic, sortBy, order]);
 
   return (
     <div>
