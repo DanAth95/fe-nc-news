@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import axios from "axios";
 
@@ -7,6 +7,7 @@ export default function CommentCard({
   commentList,
   setCommentList,
   setNoComments,
+  userList,
 }) {
   const date = `${new Date(comment.created_at).getDate()}/${
     new Date(comment.created_at).getMonth() + 1
@@ -16,6 +17,10 @@ export default function CommentCard({
   const [deleting, setDeleting] = useState(false);
 
   const { user } = useContext(UserContext);
+
+  const avatarURL = userList.filter((u) => {
+    return u.username === comment.author;
+  })[0].avatar_url;
 
   function handleClick() {
     setDeleting(true);
@@ -41,16 +46,26 @@ export default function CommentCard({
 
   return (
     <>
-      <p>
-        {comment.author} {date}
-      </p>
-      <p>{comment.body}</p>
-      <p>Votes: {comment.votes}</p>
-      {user.username === comment.author ? (
-        <button onClick={handleClick} disabled={deleting ? true : false}>
-          X
-        </button>
-      ) : null}
+      <div className="comment">
+        <div className="comment-body">
+          <img className="avatar" src={avatarURL} />
+          {/* <p>{comment.author}</p> */}
+          <p>{comment.body}</p>
+        </div>
+        {user.username === comment.author ? (
+          <button
+            className="delete-btn"
+            onClick={handleClick}
+            disabled={deleting ? true : false}
+          >
+            X
+          </button>
+        ) : null}
+      </div>
+      <div className="comment-bottom">
+        <p>{date}</p>
+        <p>Votes: {comment.votes}</p>
+      </div>
     </>
   );
 }

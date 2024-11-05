@@ -40,7 +40,7 @@ export default function Article({ article, setArticle }) {
   }
 
   return (
-    <>
+    <div className="article">
       {error ? (
         <h2>Article Not Found</h2>
       ) : (
@@ -56,17 +56,19 @@ export default function Article({ article, setArticle }) {
               <img src={article.article_img_url} />
               <p>{article.topic}</p>
               <p>{article.body}</p>
-              <button value={1} onClick={handleClick}>
-                ↑
-              </button>
-              {error ? <p>{error}</p> : <p>Votes: {votes}</p>}
-              <button value={-1} onClick={handleClick}>
-                ↓
-              </button>
+              <div className="votes">
+                <button value={1} onClick={handleClick}>
+                  👍
+                </button>
+                {error ? <p>{error}</p> : <p>Votes: {votes}</p>}
+                <button value={-1} onClick={handleClick}>
+                  👎
+                </button>
+              </div>
             </>
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }

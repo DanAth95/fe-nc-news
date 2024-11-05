@@ -6,6 +6,15 @@ import NewComment from "./NewComment";
 export default function CommentList({ article }) {
   const [commentList, setCommentList] = useState([]);
   const [noComments, setNoComments] = useState(false);
+  const [userList, setUserList] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`https://nc-news-z5fx.onrender.com/api/users`)
+      .then((response) => {
+        setUserList(response.data.users);
+      });
+  }, []);
 
   useEffect(() => {
     setNoComments(false);
@@ -26,18 +35,19 @@ export default function CommentList({ article }) {
   }, [article, commentList.length]);
 
   return (
-    <>
+    <div className="comments">
       <h3>Comments</h3>
       <NewComment
         setCommentList={setCommentList}
         commentList={commentList}
         article={article}
         setNoComments={setNoComments}
+        userList={userList}
       />
       {noComments ? (
         <p>No Comments</p>
       ) : (
-        <div id="comment-list">
+        <div className="comment-list">
           {commentList.map((comment) => {
             return (
               <div
@@ -49,12 +59,13 @@ export default function CommentList({ article }) {
                   commentList={commentList}
                   setCommentList={setCommentList}
                   setNoComments={setNoComments}
+                  userList={userList}
                 />
               </div>
             );
           })}
         </div>
       )}
-    </>
+    </div>
   );
 }
