@@ -1,14 +1,24 @@
 import Header from "./components/Header";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ArticleList from "./components/ArticleList";
 import Article from "./components/SingleArticle/Article";
 import CommentList from "./components/SingleArticle/CommentList";
 
 function App() {
-  const [topic, setTopic] = useState("");
+  const [topic, setTopic] = useState(
+    window.location.search.split("=")[1] ?? ""
+  );
   const [article, setArticle] = useState({});
+
+  useEffect(() => {
+    if (window.location.search) {
+      setTopic(window.location.search.split("=")[1]);
+    } else {
+      setTopic("");
+    }
+  }, [window.location.search]);
 
   return (
     <>
