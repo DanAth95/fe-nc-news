@@ -9,12 +9,12 @@ export default function ArticleList({ topic }) {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("https://nc-news-z5fx.onrender.com/api/articles")
+      .get(`https://nc-news-z5fx.onrender.com/api/articles?topic=${topic}`)
       .then((response) => {
         setArticleList(response.data.articles);
         setIsLoading(false);
       });
-  }, []);
+  }, [topic]);
 
   return (
     <div>

@@ -34,7 +34,11 @@ export default function Navbar({ setTopic, setArticle }) {
         ? topicList.map((topic) => {
             return (
               <li key={topic.slug}>
-                <Link id={topic.slug} onClick={handleClick}>
+                <Link
+                  id={topic.slug}
+                  onClick={handleClick}
+                  to={`?topic=${topic.slug}`}
+                >
                   {topic.slug}
                 </Link>
               </li>
