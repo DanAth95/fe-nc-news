@@ -13,6 +13,7 @@ export default function Article({ article, setArticle }) {
   ).getMonth()}/${new Date(article.created_at).getFullYear()}`;
 
   useEffect(() => {
+    setError("");
     setIsLoading(true);
     axios
       .get(`https://nc-news-z5fx.onrender.com/api/articles/${article_id}`)
@@ -20,6 +21,9 @@ export default function Article({ article, setArticle }) {
         setArticle(response.data.article);
         setVotes(response.data.article.votes);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
       });
   }, []);
 
@@ -36,27 +40,33 @@ export default function Article({ article, setArticle }) {
   }
 
   return (
-    <div className="article">
-      {isLoading ? (
-        <p>Loading...</p>
+    <>
+      {error ? (
+        <h2>Article Not Found</h2>
       ) : (
-        <>
-          <h2>{article.title}</h2>
-          <p>
-            Written by: {article.author}, {date}
-          </p>
-          <img src={article.article_img_url} />
-          <p>{article.topic}</p>
-          <p>{article.body}</p>
-          <button value={1} onClick={handleClick}>
-            ↑
-          </button>
-          {error ? <p>{error}</p> : <p>Votes: {votes}</p>}
-          <button value={-1} onClick={handleClick}>
-            ↓
-          </button>
-        </>
+        <div className="article">
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <>
+              <h2>{article.title}</h2>
+              <p>
+                Written by: {article.author}, {date}
+              </p>
+              <img src={article.article_img_url} />
+              <p>{article.topic}</p>
+              <p>{article.body}</p>
+              <button value={1} onClick={handleClick}>
+                ↑
+              </button>
+              {error ? <p>{error}</p> : <p>Votes: {votes}</p>}
+              <button value={-1} onClick={handleClick}>
+                ↓
+              </button>
+            </>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 }

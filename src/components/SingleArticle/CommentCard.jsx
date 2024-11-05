@@ -2,7 +2,12 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import axios from "axios";
 
-export default function CommentCard({ comment, commentList, setCommentList }) {
+export default function CommentCard({
+  comment,
+  commentList,
+  setCommentList,
+  setNoComments,
+}) {
   const date = `${new Date(comment.created_at).getDate()}/${
     new Date(comment.created_at).getMonth() + 1
   }/${new Date(comment.created_at).getFullYear()}`;
@@ -25,6 +30,9 @@ export default function CommentCard({ comment, commentList, setCommentList }) {
       )
       .then(() => {
         setDeleting(false);
+        if (commentList.length === 1) {
+          setNoComments(true);
+        }
       })
       .catch((err) => {
         setError(err);
