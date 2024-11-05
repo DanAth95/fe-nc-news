@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import ArticleList from "./components/ArticleList";
 import Article from "./components/SingleArticle/Article";
 import CommentList from "./components/SingleArticle/CommentList";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,6 +42,7 @@ function App() {
             </>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

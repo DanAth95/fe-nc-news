@@ -2,17 +2,25 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import axios from "axios";
 
-export default function NewComment({ setCommentList, commentList, article }) {
+export default function NewComment({
+  setCommentList,
+  commentList,
+  article,
+  setNoComments,
+}) {
   const [newComment, setNewComment] = useState("Add a comment...");
   const [posting, setPosting] = useState(false);
   const [error, setError] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
 
   const { user } = useContext(UserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
     setError(false);
+    setNoComments(false);
     setPosting(true);
+
     const postingComment = {
       body: newComment,
       username: user.username,
@@ -36,6 +44,7 @@ export default function NewComment({ setCommentList, commentList, article }) {
       )
       .then(() => {
         setPosting(false);
+        setNewComment("");
       })
       .catch((err) => {
         setError(true);
@@ -43,6 +52,10 @@ export default function NewComment({ setCommentList, commentList, article }) {
   }
 
   function handleChange(e) {
+    setIsEmpty(false);
+    if (e.target.value === "") {
+      setIsEmpty(true);
+    }
     setNewComment(e.target.value);
   }
 
@@ -54,12 +67,12 @@ export default function NewComment({ setCommentList, commentList, article }) {
           value={newComment}
           onChange={handleChange}
           onClick={(e) => {
-            if (newComment === "Add a comment...") {
+            if (e.target.value === "Add a comment...") {
               e.target.value = "";
             }
           }}
           onBlur={(e) => {
-            if (!e.target.value) {
+            if (e.target.value === "") {
               e.target.value = "Add a comment...";
             }
           }}
@@ -68,7 +81,7 @@ export default function NewComment({ setCommentList, commentList, article }) {
           type="submit"
           onClick={handleSubmit}
           value={posting ? "posting..." : "Submit"}
-          disabled={posting ? true : false}
+          disabled={posting || isEmpty ? true : false}
         />
       </form>
       {error ? <p>Comment failed to post. Please try again</p> : null}

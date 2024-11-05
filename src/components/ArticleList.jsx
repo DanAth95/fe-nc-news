@@ -5,8 +5,10 @@ import ArticleCard from "./ArticleCard";
 export default function ArticleList({ topic, sortBy, order }) {
   const [articleList, setArticleList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
+    setError("");
     setIsLoading(true);
     axios
       .get(
@@ -15,22 +17,31 @@ export default function ArticleList({ topic, sortBy, order }) {
       .then((response) => {
         setArticleList(response.data.articles);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        setError(err.response.data.msg);
       });
   }, [topic, sortBy, order]);
 
   return (
-    <div>
-      {isLoading ? (
-        <p>Loading...</p>
+    <>
+      {error ? (
+        <h2>{error}</h2>
       ) : (
-        articleList.map((article) => {
-          return (
-            <div key={article.article_id} className="article-card">
-              <ArticleCard article={article} />
-            </div>
-          );
-        })
+        <div>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            articleList.map((article) => {
+              return (
+                <div key={article.article_id} className="article-card">
+                  <ArticleCard article={article} />
+                </div>
+              );
+            })
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 }
