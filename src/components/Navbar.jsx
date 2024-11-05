@@ -27,7 +27,7 @@ export default function Navbar({ setTopic, setArticle, topic }) {
             setArticle({});
           }}
         >
-          Home
+          HOME
         </Link>
       </li>
       {useLocation().pathname === "/" ? (
@@ -36,43 +36,43 @@ export default function Navbar({ setTopic, setArticle, topic }) {
             return (
               <li key={t.slug}>
                 <Link id={t.slug} onClick={handleClick} to={`?topic=${t.slug}`}>
-                  {t.slug}
+                  {t.slug.toUpperCase()}
                 </Link>
               </li>
             );
           })}
           <div className="dropdown">
-            <button className="dropbtn">sort by</button>
+            <button className="dropbtn">SORT BY</button>
             <div className="dropdown-content">
               <Link to={`?${topic ? `topic=${topic}&` : ``}sort_by=created_at`}>
-                date (most recent)
+                Date (most recent)
               </Link>
               <Link
                 to={`?${
                   topic ? `topic=${topic}&` : ``
                 }sort_by=created_at&order=asc`}
               >
-                date (oldest)
+                Date (oldest)
               </Link>
               <Link
                 to={`?${topic ? `topic=${topic}&` : ``}sort_by=comment_count`}
               >
-                comments (most)
+                Comments (most)
               </Link>
               <Link
                 to={`?${
                   topic ? `topic=${topic}&` : ``
                 }sort_by=comment_count&order=asc`}
               >
-                comments (least)
+                Comments (least)
               </Link>
               <Link to={`?${topic ? `topic=${topic}&` : ``}sort_by=votes`}>
-                votes (most popular)
+                Votes (most popular)
               </Link>
               <Link
                 to={`?${topic ? `topic=${topic}&` : ``}sort_by=votes&order=asc`}
               >
-                votes (least popular)
+                Votes (least popular)
               </Link>
             </div>
           </div>

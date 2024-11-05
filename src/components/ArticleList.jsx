@@ -28,7 +28,7 @@ export default function ArticleList({ topic, sortBy, order }) {
       {error ? (
         <h2>{error}</h2>
       ) : (
-        <div>
+        <div className="article-list">
           {isLoading ? (
             <p>Loading...</p>
           ) : (

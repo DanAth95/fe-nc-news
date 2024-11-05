@@ -61,8 +61,11 @@ export default function NewComment({
 
   return (
     <div id="newComment">
+      <h4>Leave a Comment</h4>
+      <p>You are logged in as {user.username}</p>
       <form>
         <input
+          className="comment-bar"
           type="text"
           value={newComment}
           onChange={handleChange}

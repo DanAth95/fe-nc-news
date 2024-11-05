@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
-
 export default function Header() {
   return (
-    <h1>
-      <Link to="/">NC News</Link>
-    </h1>
+    <div className="NCnews">
+      <h1 className="logo">N</h1> <h1 className="logo">C</h1> <h1>NEWS</h1>
+    </div>
   );
 }
