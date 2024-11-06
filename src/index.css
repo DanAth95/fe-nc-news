@@ -106,6 +106,7 @@ button:focus-visible {
 
 .article > img {
   margin-bottom: -10px;
+  width: 80%;
 }
 
 .article-list {
@@ -207,8 +208,9 @@ h4 {
   gap: 2vh;
 }
 
-.comment-body > p {
-  height: 50px;
+.comment-text {
+  height: 80px;
+  overflow: auto;
 }
 
 .comment-bottom {

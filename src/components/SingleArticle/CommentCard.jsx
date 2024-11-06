@@ -50,7 +50,7 @@ export default function CommentCard({
         <div className="comment-body">
           <img className="avatar" src={avatarURL} />
           {/* <p>{comment.author}</p> */}
-          <p>{comment.body}</p>
+          <p className="comment-text">{comment.body}</p>
         </div>
         {user.username === comment.author ? (
           <button
