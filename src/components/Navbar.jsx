@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Navbar({ setTopic, setArticle, topic }) {
   const [topicList, setTopicList] = useState([]);
+
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     axios
@@ -14,6 +17,7 @@ export default function Navbar({ setTopic, setArticle, topic }) {
   }, []);
 
   function handleClick(e) {
+    setPage(1);
     setTopic(e.target.id);
   }
 
@@ -24,6 +28,7 @@ export default function Navbar({ setTopic, setArticle, topic }) {
           to="/"
           onClick={() => {
             setTopic("");
+            setPage(1);
             setArticle({});
           }}
         >
@@ -78,6 +83,9 @@ export default function Navbar({ setTopic, setArticle, topic }) {
           </div>
         </>
       ) : null}
+      <li>
+        <Link to="/user">{user ? "ACCOUNT" : "SIGN IN"}</Link>
+      </li>
     </ul>
   );
 }

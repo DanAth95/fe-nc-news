@@ -1,11 +1,11 @@
 import Header from "./components/Header";
 import { Routes, Route, useLocation, useSearchParams } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ArticleList from "./components/ArticleList";
 import Article from "./components/SingleArticle/Article";
-import CommentList from "./components/SingleArticle/CommentList";
 import NotFound from "./components/NotFound";
+import { UserContext } from "./contexts/UserContext";
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,6 +13,7 @@ function App() {
   const [sortBy, setSortBy] = useState(searchParams.get("sort_by") ?? "");
   const [order, setOrder] = useState(searchParams.get("order") ?? "");
   const [article, setArticle] = useState({});
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     setTopic(searchParams.get("topic") ?? "");
@@ -22,28 +23,44 @@ function App() {
 
   return (
     <>
-      <Header />
-      <Navbar setTopic={setTopic} setArticle={setArticle} topic={topic} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <ArticleList topic={topic} sortBy={sortBy} order={order} />{" "}
-            </>
-          }
+      <header>
+        <Header />
+      </header>
+      <nav>
+        <Navbar
+          setTopic={setTopic}
+          setArticle={setArticle}
+          topic={topic}
+          setPage={setPage}
         />
-        <Route
-          path="/article/:article_id"
-          element={
-            <>
-              <Article article={article} setArticle={setArticle} />
-              <CommentList article={article} />
-            </>
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      </nav>
+      <main>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <ArticleList
+                  topic={topic}
+                  sortBy={sortBy}
+                  order={order}
+                  page={page}
+                  setPage={setPage}
+                />{" "}
+              </>
+            }
+          />
+          <Route
+            path="/article/:article_id"
+            element={
+              <>
+                <Article article={article} setArticle={setArticle} />
+              </>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
     </>
   );
 }

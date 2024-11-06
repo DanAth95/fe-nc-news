@@ -8,7 +8,7 @@ export default function ArticleCard({ article }) {
 
   return (
     <>
-      <img src={article.article_img_url} />
+      <img src={article.article_img_url} alt="" />
       <div className="article-card-info">
         <h4>{article.title}</h4>
         <p>{article.author}</p>

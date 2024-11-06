@@ -48,7 +48,7 @@ export default function CommentCard({
     <>
       <div className="comment">
         <div className="comment-body">
-          <img className="avatar" src={avatarURL} />
+          <img className="avatar" src={avatarURL} alt={comment.author} />
           {/* <p>{comment.author}</p> */}
           <p className="comment-text">{comment.body}</p>
         </div>

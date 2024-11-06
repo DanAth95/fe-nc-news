@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CommentList from "./CommentList";
 
 export default function Article({ article, setArticle }) {
   const { article_id } = useParams();
@@ -83,48 +84,51 @@ export default function Article({ article, setArticle }) {
       {error ? (
         <h2>Article Not Found</h2>
       ) : (
-        <div className="article">
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            <>
-              <h2>{article.title}</h2>
-              <p>
-                Written by: {article.author}, {date}
-              </p>
-              <img src={article.article_img_url} />
-              <p>{article.topic}</p>
-              <p>{article.body}</p>
-              <div className="votes">
-                <button
-                  value={liked ? -1 : 1}
-                  style={
-                    liked
-                      ? { backgroundColor: "#b80000" }
-                      : { backgroundColor: "#f5f5f5" }
-                  }
-                  disabled={disable ? true : false}
-                  onClick={handlelike}
-                >
-                  👍
-                </button>
-                {error ? <p>{error}</p> : <p>Votes: {votes}</p>}
-                <button
-                  value={disliked ? 1 : -1}
-                  style={
-                    disliked
-                      ? { backgroundColor: "#b80000" }
-                      : { backgroundColor: "#f5f5f5" }
-                  }
-                  disabled={disable ? true : false}
-                  onClick={handledislike}
-                >
-                  👎
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+        <>
+          <div className="article">
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <h2>{article.title}</h2>
+                <p>
+                  Written by: {article.author}, {date}
+                </p>
+                <img src={article.article_img_url} alt="" />
+                <p>{article.topic}</p>
+                <p>{article.body}</p>
+                <div className="votes">
+                  <button
+                    value={liked ? -1 : 1}
+                    style={
+                      liked
+                        ? { backgroundColor: "#b80000" }
+                        : { backgroundColor: "#f5f5f5" }
+                    }
+                    disabled={disable ? true : false}
+                    onClick={handlelike}
+                  >
+                    👍
+                  </button>
+                  {error ? <p>{error}</p> : <p>Votes: {votes}</p>}
+                  <button
+                    value={disliked ? 1 : -1}
+                    style={
+                      disliked
+                        ? { backgroundColor: "#b80000" }
+                        : { backgroundColor: "#f5f5f5" }
+                    }
+                    disabled={disable ? true : false}
+                    onClick={handledislike}
+                  >
+                    👎
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+          <CommentList article={article} isLoading={isLoading} />
+        </>
       )}
     </div>
   );

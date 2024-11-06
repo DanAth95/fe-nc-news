@@ -89,6 +89,20 @@ button:focus-visible {
   color: white;
 }
 
+.page-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-left: 35vw;
+}
+
+.page-btns > button {
+  height: 30px;
+  padding-top: 5px;
+  margin-top: 12px;
+  color: whitesmoke;
+}
+
 .article {
   margin-left: 2vw;
 }
@@ -137,18 +151,19 @@ h4 {
 
 .article-card-info {
   margin-left: 10px;
-  margin-top: -10px;
-  font-size: x-small;
+  margin-top: -12px;
+  font-size: small;
 }
 
 .article-card-info > p {
   margin-top: 30px;
+  line-height: 5px;
 }
 
 .article-card-info > a {
   color: #b80000;
   position: relative;
-  left: 135px;
+  left: 125px;
   bottom: 25px;
 }
 
@@ -237,6 +252,7 @@ h4 {
 .comment-bar {
   width: 50%;
   margin-right: 25px;
+  margin-left: 10px;
 }
 
 .dropbtn {

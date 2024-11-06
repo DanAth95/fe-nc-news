@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import CommentCard from "./CommentCard";
 import NewComment from "./NewComment";
 
-export default function CommentList({ article }) {
+export default function CommentList({ article, isLoading }) {
   const [commentList, setCommentList] = useState([]);
   const [noComments, setNoComments] = useState(false);
   const [userList, setUserList] = useState([]);
@@ -36,39 +36,43 @@ export default function CommentList({ article }) {
   }, [article, posted]);
 
   return (
-    <div className="comments">
-      <h3>Comments</h3>
-      <NewComment
-        setCommentList={setCommentList}
-        commentList={commentList}
-        article={article}
-        setNoComments={setNoComments}
-        userList={userList}
-        posted={posted}
-        setPosted={setPosted}
-      />
-      {noComments ? (
-        <p>No Comments</p>
-      ) : (
-        <div className="comment-list">
-          {commentList.map((comment) => {
-            return (
-              <div
-                key={comment.body + comment.comment_id}
-                className="comment-card"
-              >
-                <CommentCard
-                  comment={comment}
-                  commentList={commentList}
-                  setCommentList={setCommentList}
-                  setNoComments={setNoComments}
-                  userList={userList}
-                />
-              </div>
-            );
-          })}
+    <>
+      {isLoading ? null : (
+        <div className="comments">
+          <h3>Comments</h3>
+          <NewComment
+            setCommentList={setCommentList}
+            commentList={commentList}
+            article={article}
+            setNoComments={setNoComments}
+            userList={userList}
+            posted={posted}
+            setPosted={setPosted}
+          />
+          {noComments ? (
+            <p>No Comments</p>
+          ) : (
+            <div className="comment-list">
+              {commentList.map((comment) => {
+                return (
+                  <div
+                    key={comment.body + comment.comment_id}
+                    className="comment-card"
+                  >
+                    <CommentCard
+                      comment={comment}
+                      commentList={commentList}
+                      setCommentList={setCommentList}
+                      setNoComments={setNoComments}
+                      userList={userList}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </>
   );
 }
