@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 export default function Article({ article, setArticle }) {
   const { article_id } = useParams();
   const [votes, setVotes] = useState(0);
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false);
+  const [disable, setDisable] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,15 +30,51 @@ export default function Article({ article, setArticle }) {
       });
   }, []);
 
-  function handleClick(e) {
+  function handlelike(e) {
     setError("");
-    setVotes(votes + Number(e.target.value));
+    setDisable(true);
+    if (disliked) {
+      setVotes(Number(votes) + 2 * Number(e.target.value));
+      setDisliked(false);
+    } else {
+      setVotes(Number(votes) + Number(e.target.value));
+    }
     axios
       .patch(`https://nc-news-z5fx.onrender.com/api/articles/${article_id}`, {
         inc_votes: Number(e.target.value),
       })
+      .then(() => {
+        setLiked(!liked);
+        setDisable(false);
+      })
       .catch((err) => {
         setError(err);
+        setVotes(Number(votes) - Number(e.target.value));
+        setDisable(false);
+      });
+  }
+
+  function handledislike(e) {
+    setDisable(true);
+    setError("");
+    if (liked) {
+      setVotes(Number(votes) + 2 * Number(e.target.value));
+      setLiked(false);
+    } else {
+      setVotes(Number(votes) + Number(e.target.value));
+    }
+    axios
+      .patch(`https://nc-news-z5fx.onrender.com/api/articles/${article_id}`, {
+        inc_votes: Number(e.target.value),
+      })
+      .then(() => {
+        setDisliked(!disliked);
+        setDisable(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setVotes(Number(votes) - Number(e.target.value));
+        setDisable(false);
       });
   }
 
@@ -57,11 +96,29 @@ export default function Article({ article, setArticle }) {
               <p>{article.topic}</p>
               <p>{article.body}</p>
               <div className="votes">
-                <button value={1} onClick={handleClick}>
+                <button
+                  value={liked ? -1 : 1}
+                  style={
+                    liked
+                      ? { backgroundColor: "#b80000" }
+                      : { backgroundColor: "#f5f5f5" }
+                  }
+                  disabled={disable ? true : false}
+                  onClick={handlelike}
+                >
                   👍
                 </button>
                 {error ? <p>{error}</p> : <p>Votes: {votes}</p>}
-                <button value={-1} onClick={handleClick}>
+                <button
+                  value={disliked ? 1 : -1}
+                  style={
+                    disliked
+                      ? { backgroundColor: "#b80000" }
+                      : { backgroundColor: "#f5f5f5" }
+                  }
+                  disabled={disable ? true : false}
+                  onClick={handledislike}
+                >
                   👎
                 </button>
               </div>
