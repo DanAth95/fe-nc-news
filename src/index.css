@@ -75,7 +75,7 @@ button:focus-visible {
   display: flex;
   flex-direction: row;
   list-style: none;
-  gap: 1vw;
+  gap: 2vw;
   font-size: small;
   border: 1px solid black;
   width: 100%;
