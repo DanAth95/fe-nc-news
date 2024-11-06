@@ -28,19 +28,22 @@ export default function ArticleList({ topic, sortBy, order }) {
       {error ? (
         <h2>{error}</h2>
       ) : (
-        <div className="article-list">
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            articleList.map((article) => {
-              return (
-                <div key={article.article_id} className="article-card">
-                  <ArticleCard article={article} />
-                </div>
-              );
-            })
-          )}
-        </div>
+        <>
+          <h3>{topic.toUpperCase()}</h3>
+          <div className="article-list">
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              articleList.map((article) => {
+                return (
+                  <div key={article.article_id} className="article-card">
+                    <ArticleCard article={article} />
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </>
       )}
     </>
   );
