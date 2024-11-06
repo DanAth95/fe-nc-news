@@ -7,6 +7,8 @@ export default function NewComment({
   commentList,
   article,
   setNoComments,
+  posted,
+  setPosted,
 }) {
   const [newComment, setNewComment] = useState("Add a comment...");
   const [posting, setPosting] = useState(false);
@@ -45,6 +47,7 @@ export default function NewComment({
       .then(() => {
         setPosting(false);
         setNewComment("");
+        setPosted(posted + 1);
       })
       .catch((err) => {
         setError(true);

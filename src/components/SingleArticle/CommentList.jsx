@@ -7,6 +7,7 @@ export default function CommentList({ article }) {
   const [commentList, setCommentList] = useState([]);
   const [noComments, setNoComments] = useState(false);
   const [userList, setUserList] = useState([]);
+  const [posted, setPosted] = useState(0);
 
   useEffect(() => {
     axios
@@ -32,7 +33,7 @@ export default function CommentList({ article }) {
           }
         });
     }
-  }, [article, commentList.length]);
+  }, [article, posted]);
 
   return (
     <div className="comments">
@@ -43,6 +44,8 @@ export default function CommentList({ article }) {
         article={article}
         setNoComments={setNoComments}
         userList={userList}
+        posted={posted}
+        setPosted={setPosted}
       />
       {noComments ? (
         <p>No Comments</p>
