@@ -55,6 +55,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #b80000;
+  color: whitesmoke;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -205,6 +206,35 @@ h4 {
   color: whitesmoke;
   text-align: center;
   padding-left: 12px;
+}
+
+.delete-article-btn {
+  height: 30px;
+  width: 35px;
+  color: whitesmoke;
+  background-color: #b80000;
+  position: absolute;
+  text-align: center;
+}
+
+.delete-popup {
+  display: none;
+  position: fixed;
+  background-color: whitesmoke;
+  border: 3px solid #b80000;
+  padding: 10px;
+  padding-bottom: 20px;
+  bottom: 400px;
+  right: 43vw;
+  z-index: 9;
+  gap: 10px;
+}
+
+.pop-up-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: whitesmoke;
 }
 
 .comment {

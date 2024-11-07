@@ -6,6 +6,7 @@ import ArticleList from "./components/ArticleList";
 import Article from "./components/SingleArticle/Article";
 import NotFound from "./components/NotFound";
 import { UserContext } from "./contexts/UserContext";
+import UserProfile from "./components/SingleArticle/User/UserProfile";
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,6 +59,7 @@ function App() {
               </>
             }
           />
+          <Route path="/user" element={<UserProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

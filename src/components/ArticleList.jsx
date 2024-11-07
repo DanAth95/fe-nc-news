@@ -31,7 +31,7 @@ export default function ArticleList({ topic, sortBy, order, page, setPage }) {
         <h2>{error}</h2>
       ) : (
         <>
-          <h2>{topic ? topic.toUpperCase() : "All Articles"}</h2>
+          <h2>{topic ? topic.toUpperCase() : "ALL ARTICLES"}</h2>
           <div className="article-list">
             {isLoading ? (
               <p>Loading...</p>
