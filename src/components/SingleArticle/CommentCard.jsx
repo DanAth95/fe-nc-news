@@ -15,8 +15,66 @@ export default function CommentCard({
 
   const [error, setError] = useState("");
   const [deleting, setDeleting] = useState(false);
+  const [votes, setVotes] = useState(comment.votes);
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false);
+  const [disable, setDisable] = useState(false);
 
   const { user } = useContext(UserContext);
+
+  function handlelike(e) {
+    setError("");
+    setDisable(true);
+    if (disliked) {
+      setVotes(Number(votes) + 2 * Number(e.target.value));
+      setDisliked(false);
+    } else {
+      setVotes(Number(votes) + Number(e.target.value));
+    }
+    axios
+      .patch(
+        `https://nc-news-z5fx.onrender.com/api/comments/${comment.comment_id}`,
+        {
+          inc_votes: Number(e.target.value),
+        }
+      )
+      .then(() => {
+        setLiked(!liked);
+        setDisable(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setVotes(Number(votes) - Number(e.target.value));
+        setDisable(false);
+      });
+  }
+
+  function handledislike(e) {
+    setDisable(true);
+    setError("");
+    if (liked) {
+      setVotes(Number(votes) + 2 * Number(e.target.value));
+      setLiked(false);
+    } else {
+      setVotes(Number(votes) + Number(e.target.value));
+    }
+    axios
+      .patch(
+        `https://nc-news-z5fx.onrender.com/api/comments/${comment.comment_id}`,
+        {
+          inc_votes: Number(e.target.value),
+        }
+      )
+      .then(() => {
+        setDisliked(!disliked);
+        setDisable(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setVotes(Number(votes) - Number(e.target.value));
+        setDisable(false);
+      });
+  }
 
   const avatarURL = userList.filter((u) => {
     return u.username === comment.author;
@@ -64,6 +122,33 @@ export default function CommentCard({
       </div>
       <div className="comment-bottom">
         <p>{date}</p>
+        <div className="comment-votes">
+          <button
+            value={liked ? -1 : 1}
+            style={
+              liked
+                ? { backgroundColor: "#b80000", color: "#f5f5f5" }
+                : { backgroundColor: "#f5f5f5" }
+            }
+            disabled={disable ? true : false}
+            onClick={handlelike}
+          >
+            ⬆
+          </button>
+          {error ? <p>{error}</p> : <p>Votes: {votes}</p>}
+          <button
+            value={disliked ? 1 : -1}
+            style={
+              disliked
+                ? { backgroundColor: "#b80000", color: "#f5f5f5" }
+                : { backgroundColor: "#f5f5f5" }
+            }
+            disabled={disable ? true : false}
+            onClick={handledislike}
+          >
+            ⬇
+          </button>
+        </div>
         <p>Votes: {comment.votes}</p>
       </div>
     </>

@@ -102,26 +102,26 @@ export default function Article({ article, setArticle }) {
                     value={liked ? -1 : 1}
                     style={
                       liked
-                        ? { backgroundColor: "#b80000" }
+                        ? { backgroundColor: "#b80000", color: "#f5f5f5" }
                         : { backgroundColor: "#f5f5f5" }
                     }
                     disabled={disable ? true : false}
                     onClick={handlelike}
                   >
-                    👍
+                    ⬆
                   </button>
                   {error ? <p>{error}</p> : <p>Votes: {votes}</p>}
                   <button
                     value={disliked ? 1 : -1}
                     style={
                       disliked
-                        ? { backgroundColor: "#b80000" }
+                        ? { backgroundColor: "#b80000", color: "#f5f5f5" }
                         : { backgroundColor: "#f5f5f5" }
                     }
                     disabled={disable ? true : false}
                     onClick={handledislike}
                   >
-                    👎
+                    ⬇
                   </button>
                 </div>
               </>

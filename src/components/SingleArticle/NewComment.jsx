@@ -67,7 +67,7 @@ export default function NewComment({
       <h4>Leave a Comment</h4>
       <p>You are logged in as {user.username}</p>
       <form>
-        <label for="c">Type your comment here</label>
+        <label htmlFor="c">Type your comment here</label>
         <input
           id="c"
           className="comment-bar"
