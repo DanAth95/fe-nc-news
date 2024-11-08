@@ -7,6 +7,7 @@ import Article from "./components/SingleArticle/Article";
 import NotFound from "./components/NotFound";
 import { UserContext } from "./contexts/UserContext";
 import UserProfile from "./components/SingleArticle/User/UserProfile";
+import Login from "./components/SingleArticle/User/Login";
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,6 +16,7 @@ function App() {
   const [order, setOrder] = useState(searchParams.get("order") ?? "");
   const [article, setArticle] = useState({});
   const [page, setPage] = useState(1);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     setTopic(searchParams.get("topic") ?? "");
@@ -60,6 +62,7 @@ function App() {
             }
           />
           <Route path="/user" element={<UserProfile />} />
+          <Route path="/sign-in" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

@@ -164,7 +164,7 @@ h4 {
   margin-bottom: 10px;
   margin-left: 10px;
   width: 350px;
-  height: 150px;
+  height: 200px;
 }
 
 .article-card-info {
@@ -175,7 +175,7 @@ h4 {
 
 .article-card-info > p {
   margin-top: 30px;
-  line-height: 5px;
+  line-height: 2px;
 }
 
 .article-card-info > a {
@@ -187,7 +187,52 @@ h4 {
 
 .article-card > img {
   width: 150px;
-  height: 150px;
+  height: 200px;
+}
+
+.article-image {
+  width: 300px;
+  height: 300px;
+}
+
+.article-text {
+  font-size: large;
+}
+
+.login {
+  position: relative;
+  left: 27%;
+  top: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  width: 50vw;
+  height: 100px;
+  border: 1px solid #b80000;
+  padding-top: 70px;
+}
+
+.login > h3 {
+  position: relative;
+  top: -80px;
+  right: 10px;
+}
+
+.login-input {
+  width: 300px;
+  height: 25px;
+}
+
+.login > input {
+  height: 25px;
+}
+
+.login-error {
+  position: relative;
+  left: 48%;
+  top: 80px;
+  color: #b80000;
 }
 
 .comments {

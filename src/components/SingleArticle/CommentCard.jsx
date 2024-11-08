@@ -13,6 +13,12 @@ export default function CommentCard({
     new Date(comment.created_at).getMonth() + 1
   }/${new Date(comment.created_at).getFullYear()}`;
 
+  const hours = new Date(comment.created_at).getHours();
+  const minutes = new Date(comment.created_at).getMinutes();
+  const time = `${hours < 10 ? "0" : ""}${hours}:${
+    minutes < 10 ? "0" : ""
+  }${minutes}`;
+
   const [error, setError] = useState("");
   const [deleting, setDeleting] = useState(false);
   const [votes, setVotes] = useState(comment.votes);
@@ -107,7 +113,7 @@ export default function CommentCard({
       <div className="comment">
         <div className="comment-body">
           <img className="avatar" src={avatarURL} alt={comment.author} />
-          {/* <p>{comment.author}</p> */}
+          <p>{comment.author}</p>
           <p className="comment-text">{comment.body}</p>
         </div>
         {user.username === comment.author ? (
@@ -121,7 +127,9 @@ export default function CommentCard({
         ) : null}
       </div>
       <div className="comment-bottom">
-        <p>{date}</p>
+        <p>
+          {date} {time}
+        </p>
         <div className="comment-votes">
           <button
             value={liked ? -1 : 1}

@@ -31,43 +31,44 @@ export default function ArticleList({ topic, sortBy, order, page, setPage }) {
         <h2>{error}</h2>
       ) : (
         <>
-          <h2>{topic ? topic.toUpperCase() : "ALL ARTICLES"}</h2>
-          <div className="article-list">
-            {isLoading ? (
-              <p>Loading...</p>
-            ) : (
-              articleList.map((article) => {
-                return (
-                  <div key={article.article_id} className="article-card">
-                    <ArticleCard article={article} />
-                  </div>
-                );
-              })
-            )}
-          </div>
-          <div className="page-btns">
-            {page === 1 ? null : (
-              <button
-                onClick={() => {
-                  setPage(page - 1);
-                }}
-              >
-                {" "}
-                Previous Page
-              </button>
-            )}
-
-            <p>{page}</p>
-            {page * 12 >= totalArticles ? null : (
-              <button
-                onClick={() => {
-                  setPage(page + 1);
-                }}
-              >
-                Next Page
-              </button>
-            )}
-          </div>
+          {isLoading ? (
+            <h2>Loading...</h2>
+          ) : (
+            <>
+              <h2>{topic ? topic.toUpperCase() : "ALL ARTICLES"}</h2>
+              <div className="article-list">
+                {articleList.map((article) => {
+                  return (
+                    <div key={article.article_id} className="article-card">
+                      <ArticleCard article={article} />
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="page-btns">
+                {page === 1 ? null : (
+                  <button
+                    onClick={() => {
+                      setPage(page - 1);
+                    }}
+                  >
+                    {" "}
+                    Previous Page
+                  </button>
+                )}
+                <p>{page}</p>
+                {page * 12 >= totalArticles ? null : (
+                  <button
+                    onClick={() => {
+                      setPage(page + 1);
+                    }}
+                  >
+                    Next Page
+                  </button>
+                )}
+              </div>
+            </>
+          )}
         </>
       )}
     </>

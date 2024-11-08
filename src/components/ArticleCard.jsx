@@ -58,7 +58,9 @@ export default function ArticleCard({
           <img src={article.article_img_url} alt="" />
           <div className="article-card-info">
             <h4>{article.title}</h4>
-            <p>{article.author}</p>
+            <p>Author: {article.author}</p>
+            <p>Votes: {article.votes}</p>
+            <p>Comments: {article.comment_count}</p>
             <p>{date}</p>
             <Link to={`/article/${article.article_id}`}>See Article</Link>
           </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 
 export default function Article({ article, setArticle }) {
@@ -87,16 +87,20 @@ export default function Article({ article, setArticle }) {
         <>
           <div className="article">
             {isLoading ? (
-              <p>Loading...</p>
+              <h2>Loading...</h2>
             ) : (
               <>
                 <h2>{article.title}</h2>
                 <p>
                   Written by: {article.author}, {date}
                 </p>
-                <img src={article.article_img_url} alt="" />
-                <p>{article.topic}</p>
-                <p>{article.body}</p>
+                <img
+                  src={article.article_img_url}
+                  className="article-image"
+                  alt=""
+                />
+                <p>Topic: {article.topic.toUpperCase()}</p>
+                <p className="article-text">{article.body}</p>
                 <div className="votes">
                   <button
                     value={liked ? -1 : 1}
