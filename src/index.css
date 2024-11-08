@@ -116,6 +116,7 @@ button:focus-visible {
 
 .votes > button {
   color: black;
+  font-size: large;
   background-color: #f5f5f5;
   border: 1px solid #b80000;
 }
