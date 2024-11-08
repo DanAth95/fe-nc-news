@@ -149,7 +149,6 @@ export default function CommentCard({
             ⬇
           </button>
         </div>
-        <p>Votes: {comment.votes}</p>
       </div>
     </>
   );
