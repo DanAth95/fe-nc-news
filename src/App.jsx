@@ -64,7 +64,6 @@ function App() {
           />
           <Route path="/user" element={<UserProfile />} />
           <Route path="/sign-in" element={<Login />} />
-          <Route path="/musical-login" element={<Musical />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
