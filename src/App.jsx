@@ -8,6 +8,7 @@ import NotFound from "./components/NotFound";
 import { UserContext } from "./contexts/UserContext";
 import UserProfile from "./components/SingleArticle/User/UserProfile";
 import Login from "./components/SingleArticle/User/Login";
+import Musical from "./musical-login";
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -63,6 +64,7 @@ function App() {
           />
           <Route path="/user" element={<UserProfile />} />
           <Route path="/sign-in" element={<Login />} />
+          <Route path="musical-login" element={<Musical />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
